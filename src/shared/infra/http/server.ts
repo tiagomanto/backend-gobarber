@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import express, { Request, Response, NextFunction} from 'express';
+import express, { Express, Request, Response, NextFunction} from 'express';
 import cors from 'cors';
 import 'express-async-errors';
 
@@ -11,11 +11,15 @@ import AppError from '@shared/errors/AppError'
 import '@shared/infra/typeorm';
 import '@shared/container'
 
-const app = express();
+const app: Express = express();
+
+function aMiddleware(req: Request, res:Response, next:NextFunction){
+  next();
+}
 
 app.use(cors())
 app.use(express.json())
-app.use('/files', express.static(uploadConfig.tmpFolder))
+app.use('/files', express.static(uploadConfig.tmpFolder),aMiddleware)
 app.use(routes);
 
 app.use(
