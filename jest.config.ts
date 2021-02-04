@@ -2,6 +2,11 @@ const { pathsToModuleNameMapper } = require('ts-jest/utils');
 import { resolveConfig } from "prettier";
 const { compilerOptions } = require ("./tsconfig.json");
 
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node'
+};
+
 // https://jestjs.io/docs/en/configuration.html
 
 
